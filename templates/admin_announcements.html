@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>お知らせ管理（管理者）</h1>
+<form method="post" class="form">
+  <label>タイトル: <input type="text" name="title" required></label>
+  <label>本文:<textarea name="content" rows="4"></textarea></label>
+  <button type="submit" class="btn">投稿</button>
+</form>
+
+<h2>投稿一覧</h2>
+<ul class="list">
+  {% for a in announcements %}
+    <li>
+      <strong>{{ a.title }}</strong> 
+      <span class="muted">{{ a.created_at }}</span>
+      <form method="post" action="/admin/announcements/{{ a.uuid }}/delete" style="display:inline" 
+            onsubmit="return confirm('このお知らせを削除します。よろしいですか？');">
+        <button class="btn ghost" type="submit">🗑 削除</button>
+      </form>
+      <br/>{{ a.content }}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

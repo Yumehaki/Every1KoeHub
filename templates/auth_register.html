@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>アカウント登録</h1>
+<form method="post" class="form">
+  <label>メール: <input type="email" name="email" required></label>
+  <label>ユーザ名: <input type="text" name="username" required></label>
+  <label>パスワード: <input type="password" name="password" required></label>
+  <button class="btn" type="submit">登録</button>
+</form>
+{% endblock %}

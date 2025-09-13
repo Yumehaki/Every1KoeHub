@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ unit.name }}</h1>
+<div class="model-header">
+  <div class="thumb-lg">
+    {% if unit.icon_path %}
+      <img src="/media/units/{{ unit.uuid }}/icon" alt="uicon">
+    {% else %}
+      <img src="/static/defaults/unit.svg" alt="uicon">
+    {% endif %}
+  </div>
+  <div>
+    <p class="muted">UUID: {{ unit.uuid }}</p>
+    <p>{{ unit.description }}</p>
+  </div>
+</div>
+
+<h2>所属モデル</h2>
+<div class="card-grid">
+  {% for m in unit.models %}
+  <a class="card" href="/models/{{ m.uuid }}">
+    <div class="card-thumb">
+      {% if m.icon_path %}
+        <img src="/media/models/{{ m.uuid }}/icon" alt="icon">
+      {% else %}
+        <img src="/static/defaults/model.svg" alt="icon">
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <strong class="line-clamp-1">{{ m.name }}</strong>
+      <div class="meta">♥ {{ m.likes_count }} ／ ↓ {{ m.downloads }}</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+{% if user and user.uuid == unit.owner_user_uuid %}
+  <h3>モデル追加</h3>
+  <form method="post" action="/units/{{ unit.uuid }}/add_model" class="form-inline">
+    <label>モデルUUID: <input type="text" name="model_uuid" required placeholder="xxxxxxxx-xxxx-..."></label>
+    <button class="btn" type="submit">追加</button>
+  </form>
+
+  <p class="btn-row" style="margin-top:12px">
+    <a class="btn ghost" href="/units/{{ unit.uuid }}/edit">編集</a>
+    <form method="post" action="/units/{{ unit.uuid }}/delete" onsubmit="return confirm('削除しますか？');" style="display:inline">
+      <button class="btn ghost" type="submit">削除</button>
+    </form>
+  </p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>モデル検索</h1>
+<form method="get" class="form">
+  <label>キーワード: <input type="text" name="q" value="{{ q }}"></label>
+  <label>更新月(YYYY-MM): <input type="month" name="month" value="{{ month }}"></label>
+  <label>ライセンス:
+    <select name="license">
+      <option value="">(すべて)</option>
+      {% for name, text in license_templates.items() %}
+      <option value="{{ name }}" {% if license_selected == name %}selected{% endif %}>{{ name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button class="btn" type="submit">検索</button>
+</form>
+
+<h2>結果</h2>
+<div class="card-grid">
+  {% for m in results %}
+  <a class="card" href="/models/{{ m.uuid }}">
+    <div class="card-thumb">
+      {% if m.icon_path %}
+        <img src="/media/models/{{ m.uuid }}/icon" alt="icon">
+      {% else %}
+        <img src="/static/defaults/model.svg" alt="icon">
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <strong class="line-clamp-1">{{ m.name }}</strong>
+      <div class="meta">♥ {{ m.likes_count }} ／ ↓ {{ m.downloads }}</div>
+      <div class="muted">{{ m.updated_at }}</div>
+    </div>
+  </a>
+  {% else %}
+    <p class="muted">該当なし</p>
+  {% endfor %}
+</div>
+{% endblock %}

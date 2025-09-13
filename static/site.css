@@ -1,0 +1,100 @@
+:root{
+  --bg:#0f1223;
+  --panel:#161a33;
+  --card:#1b2040;
+  --muted:#a1a6c3;
+  --text:#eef0ff;
+  --brand:#6aa9ff;
+  --brand-2:#9d7bff;
+  --accent:#36d6c5;
+  --border:#2b2f57;
+  --radius:14px;
+  --shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:linear-gradient(180deg,#0e1122 0%,#0a0d1c 100%);
+  color:var(--text); font-family: ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+
+a{color:var(--brand); text-decoration:none}
+a:hover{opacity:.9}
+
+.site-header{
+  position:sticky; top:0; z-index:10; backdrop-filter: blur(8px);
+  background: linear-gradient(90deg, rgba(18,22,44,.85), rgba(18,22,44,.75));
+  border-bottom:1px solid var(--border);
+}
+.site-header .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 18px; max-width:1100px; margin:0 auto;}
+.logo{font-weight:800; letter-spacing:.3px; color:#fff; font-size:20px}
+nav a{margin-left:14px}
+.container{max-width:1100px; margin:0 auto; padding:18px}
+
+.site-footer{border-top:1px solid var(--border); background:#0d1022; padding:14px 18px; margin-top:40px}
+.site-footer .wrap{max-width:1100px; margin:0 auto}
+
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  color:#fff; border:0; border-radius:12px; padding:10px 14px; cursor:pointer; box-shadow:var(--shadow);
+}
+.btn.ghost{background:transparent; border:1px solid var(--border); color:var(--text); box-shadow:none}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap}
+
+.hero{
+  background:linear-gradient(135deg, rgba(106,169,255,.15), rgba(157,123,255,.15));
+  border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:16px;
+}
+
+.card-grid{display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:14px}
+.card{
+  display:flex; gap:12px; background:var(--card); border:1px solid var(--border);
+  border-radius:var(--radius); padding:12px; color:var(--text); box-shadow:var(--shadow);
+}
+.card:hover{transform: translateY(-2px); transition:.15s ease; border-color:#3a3f6a}
+.card-thumb{width:56px; height:56px; border-radius:12px; overflow:hidden; background:#11142a; flex:0 0 auto; border:1px solid var(--border)}
+.card-thumb img{width:100%; height:100%; object-fit:cover}
+.card-body{min-width:0}
+.meta{font-size:12px; color:var(--muted)}
+.muted{color:var(--muted)}
+.line-clamp-1{display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden}
+.line-clamp-2{-webkit-line-clamp:2}
+
+.box{
+  background:var(--panel); border:1px solid var(--border); padding:12px;
+  border-radius:var(--radius); white-space:pre-wrap;
+}
+
+.form{display:flex; flex-direction:column; gap:12px; background:var(--panel); border:1px solid var(--border); padding:16px; border-radius:var(--radius)}
+.form input[type=text],
+.form input[type=password],
+.form input[type=email],
+.form input[type=file],
+.form textarea,
+.form select{
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:#0e1330; color:var(--text)
+}
+.form fieldset{border:1px dashed var(--border); border-radius:12px; padding:12px}
+.form legend{color:var(--muted); font-size:12px}
+
+.profile{display:flex; gap:16px; align-items:center; background:var(--panel); border:1px solid var(--border);
+  padding:12px; border-radius:var(--radius)}
+.avatar img{width:72px; height:72px; border-radius:50%; border:1px solid var(--border)}
+
+.model-header{display:flex; gap:16px; align-items:flex-start; margin-bottom:10px}
+.thumb-lg{width:92px; height:92px; border-radius:18px; overflow:hidden; background:#11142a; border:1px solid var(--border)}
+.thumb-lg img{width:100%; height:100%; object-fit:cover}
+.thumb-sm{width:48px; height:48px; border-radius:12px; overflow:hidden; background:#11142a; border:1px solid var(--border)}
+.thumb-sm img{width:100%; height:100%; object-fit:cover}
+
+.sample-box{display:flex; align-items:center; gap:12px; background:var(--panel); border:1px solid var(--border); padding:12px; border-radius:var(--radius)}
+.list{list-style:none; padding:0; margin:0}
+.list li{background:var(--panel); border:1px solid var(--border); margin:8px 0; padding:10px; border-radius:12px}
+
+.chip-row{display:flex; flex-wrap:wrap; gap:8px}
+.chip{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:rgba(106,169,255,.12)}
+.chip img{width:18px; height:18px; border-radius:50%}
+
+.form-inline{display:flex; gap:8px; align-items:center; background:transparent; border:0; padding:0}

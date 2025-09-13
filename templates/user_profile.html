@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>ユーザページ {% if profile.is_admin %}<span class="badge">運営</span>{% endif %}</h1>
+<div class="profile">
+  <div class="avatar">
+    {% if profile.icon_path %}
+      <img src="/static/defaults/user.svg" alt="user"> {# 簡易: 独自配信を省略するなら defaults を表示（配信を追加してもOK） #}
+    {% else %}
+      <img src="/static/defaults/user.svg" alt="user">
+    {% endif %}
+  </div>
+  <div>
+    <p>UUID: {{ profile.uuid }}
+      {% if profile.is_admin %}<span class="chip"><img src="/static/defaults/user.svg" alt=""/>運営</span>{% endif %}
+      {% if profile.email_verified %}
+        <span class="chip">メール認証済</span>
+      {% else %}
+        <span class="chip">メール未認証</span>
+        {% if user and user.uuid == profile.uuid %}
+          <form method="post" action="/verify/start" style="display:inline"><button class="btn ghost" type="submit">メール認証を開始</button></form>
+        {% endif %}
+      {% endif %}</p>
+    <p class="muted">{{ profile.username }}</p>
+    <p class="muted">{{ profile.bio }}</p>
+  </div>
+</div>
+
+<h2>公開モデル</h2>
+<div class="card-grid">
+  {% for m in models %}
+  <a class="card" href="/models/{{ m.uuid }}">
+    <div class="card-thumb">
+      {% if m.icon_path %}
+        <img src="/media/models/{{ m.uuid }}/icon" alt="icon">
+      {% else %}
+        <img src="/static/defaults/model.svg" alt="icon">
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <strong class="line-clamp-1">{{ m.name }}</strong>
+      <div class="meta">♥ {{ m.likes_count }} ／ ↓ {{ m.downloads }}</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<h2>ユニット</h2>
+<div class="card-grid">
+  {% for u in units %}
+    <a class="card" href="/units/{{ u.uuid }}">
+      <div class="card-thumb">
+        {% if u.icon_path %}
+          <img src="/media/units/{{ u.uuid }}/icon" alt="uicon">
+        {% else %}
+          <img src="/static/defaults/unit.svg" alt="uicon">
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <strong class="line-clamp-1">{{ u.name }}</strong>
+        <div class="muted line-clamp-2">{{ u.description }}</div>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

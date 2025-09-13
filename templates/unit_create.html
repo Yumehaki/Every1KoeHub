@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>ユニット作成</h1>
+<form method="post" enctype="multipart/form-data" class="form" data-busy>
+  <label>ユニット名: <input type="text" name="name" required></label>
+  <label>説明:<textarea name="description" rows="4"></textarea></label>
+  <label>ユニットアイコン（任意・画像）:<input type="file" name="icon" accept="image/*"></label>
+  <button class="btn" type="submit">作成</button>
+</form>
+{% endblock %}

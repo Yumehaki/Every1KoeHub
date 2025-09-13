@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>音声/AIモデルを共有・発見しよう</h1>
+  <p>Every1KoeSpeechクライアントからのダウンロードにも対応しています。</p>
+</section>
+
+<h2>いいね数の多い順</h2>
+<div class="card-grid">
+  {% for m in popular %}
+  <a class="card" href="/models/{{ m.uuid }}">
+    <div class="card-thumb">
+      {% if m.icon_path %}
+        <img src="/media/models/{{ m.uuid }}/icon" alt="icon">
+      {% else %}
+        <img src="/static/defaults/model.svg" alt="icon">
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <strong class="line-clamp-1">
+        {{ m.name }}
+        {% if m.is_certified %}<img src="/static/defaults/verified.svg" alt="cert" style="width:16px;vertical-align:middle;margin-left:4px">{% endif %}
+        {% if m.is_locked %}<img src="/static/defaults/lock.svg" alt="lock" style="width:14px;vertical-align:middle;margin-left:4px">{% endif %}
+      </strong>
+      <div class="meta">♥ {{ m.likes_count }} ／ ↓ {{ m.downloads }}</div>
+      <div class="muted">{{ m.updated_at }}</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<h2>DL数の多い順</h2>
+<div class="card-grid">
+  {% for m in most_dl %}
+  <a class="card" href="/models/{{ m.uuid }}">
+    <div class="card-thumb">
+      {% if m.icon_path %}
+        <img src="/media/models/{{ m.uuid }}/icon" alt="icon">
+      {% else %}
+        <img src="/static/defaults/model.svg" alt="icon">
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <strong class="line-clamp-1">{{ m.name }}</strong>
+      <div class="meta">♥ {{ m.likes_count }} ／ ↓ {{ m.downloads }}</div>
+      <div class="muted">{{ m.updated_at }}</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<h2>新着順</h2>
+<div class="card-grid">
+  {% for m in newest %}
+  <a class="card" href="/models/{{ m.uuid }}">
+    <div class="card-thumb">
+      {% if m.icon_path %}
+        <img src="/media/models/{{ m.uuid }}/icon" alt="icon">
+      {% else %}
+        <img src="/static/defaults/model.svg" alt="icon">
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <strong class="line-clamp-1">{{ m.name }}</strong>
+      <div class="meta">♥ {{ m.likes_count }} ／ ↓ {{ m.downloads }}</div>
+      <div class="muted">{{ m.updated_at }}</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<h2>お知らせ（管理者投稿）</h2>
+<ul class="list">
+  {% for a in announcements %}
+    <li><strong>{{ a.title }}</strong> <span class="muted">{{ a.created_at }}</span><br/>{{ a.content }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
