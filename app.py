@@ -572,7 +572,7 @@ def upload_model(
     name: str = Form(...),
     description: str = Form(""),
     license_name: str = Form("Custom"),
-    license_text_custom: str = Form(""),
+    license_text: str = Form(""),
     file: UploadFile = File(...),
     # 手動メディア（抽出失敗 or 上書き用、任意）
     icon: Optional[UploadFile] = File(None),
@@ -595,7 +595,7 @@ def upload_model(
 
     # ライセンス本文
     tpl_text = next((t[1] for t in LICENSE_TEMPLATES if t[0] == license_name), "")
-    final_license_text = license_text_custom if license_name == "Custom" or license_name == "カスタムライセンス" else tpl_text
+    final_license_text = license_text if license_name == "Custom" or license_name == "カスタムライセンス" else tpl_text
 
     m = Model(
         uuid=model_uuid, user_uuid=user.uuid, name=name, description=description,
