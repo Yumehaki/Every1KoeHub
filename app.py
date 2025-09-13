@@ -595,7 +595,7 @@ def upload_model(
 
     # ライセンス本文
     tpl_text = next((t[1] for t in LICENSE_TEMPLATES if t[0] == license_name), "")
-    final_license_text = license_text_custom if license_name == "Custom" else tpl_text
+    final_license_text = license_text_custom if license_name == "Custom" or license_name == "カスタムライセンス" else tpl_text
 
     m = Model(
         uuid=model_uuid, user_uuid=user.uuid, name=name, description=description,
@@ -768,7 +768,7 @@ def model_edit(
             m.is_public = False
     m.license_name = license_name
     tpl_text = next((t[1] for t in LICENSE_TEMPLATES if t[0] == license_name), "")
-    m.license_text = license_text if license_name == "Custom" else tpl_text
+    m.license_text = license_text if license_name == "Custom" or license_name == "カスタムライセンス" else tpl_text
     # 手動での再設定（任意）
     if icon:
         ext = os.path.splitext(icon.filename or "")[1] or ".png"
